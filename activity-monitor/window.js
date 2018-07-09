@@ -50,8 +50,15 @@ function getCpuTimes(cpu) {
 }
 
 function drawChart() {
+  var cpus = os.cpus(); 
+  for(var i = 0, len = cpus.length; i < len; i++) {
+    var cpu = cpus[i];
+    console.log(cpu);
+    console.log("CPU #: " + i + " time: " + cpu.times.user + "CPU model: " + JSON.stringify(cpu.model));
+ }
+
   chart = new Chart($('.chart'), {
-    type: 'doughnut',
+    type: 'doughnut', //doughnut
     data: {
       labels: [
         'User Time (ms)',
@@ -64,7 +71,7 @@ function drawChart() {
       maintainAspectRatio: false,
       title: {
         display: true,
-        text: 'CPU Activity',
+        text: 'CPU Activity for ' + JSON.stringify(cpu.model) + " @ " + cpu.speed/1000 + "ghz" ,
         fontColor: 'rgb(250, 250, 250)',
         fontSize: 16
       },
